@@ -1,0 +1,98 @@
+$cc-navy: #0d2d62;
+$cc-navy-dark: #081d40;
+$cc-gold: #c9a227;
+$cc-gray: #6b7280;
+$cc-gray-light: #f5f6f8;
+
+.cc-wifi-content {
+  padding: 56px 0 64px;
+
+  p {
+    color: #333;
+    line-height: 1.75;
+    font-size: 16px;
+    margin-bottom: 18px;
+  }
+}
+
+.cc-wifi-lede {
+  font-size: 19px !important;
+  font-weight: 600;
+  color: $cc-navy !important;
+  line-height: 1.5 !important;
+  border-left: 3px solid $cc-gold;
+  padding-left: 16px;
+  margin-bottom: 28px !important;
+}
+
+.cc-wifi-card {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  background: $cc-gray-light;
+  border: 1px solid rgba(13, 45, 98, 0.08);
+  border-radius: 12px;
+  padding: 28px;
+  margin-top: 32px;
+}
+
+.cc-wifi-icon {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: rgba(13, 45, 98, 0.08);
+  color: $cc-navy;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cc-wifi-card-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: $cc-navy;
+  margin-bottom: 8px;
+}
+
+.cc-wifi-card-text {
+  font-size: 14.5px;
+  color: $cc-gray;
+  line-height: 1.6;
+  margin-bottom: 18px !important;
+}
+
+.cc-wifi-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: $cc-navy;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.15s ease;
+
+  svg {
+    transition: transform 0.2s ease;
+  }
+
+  &:hover {
+    background: $cc-gold;
+    color: $cc-navy-dark;
+    transform: translateY(-1px);
+
+    svg {
+      transform: translate(1px, -1px);
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .cc-wifi-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

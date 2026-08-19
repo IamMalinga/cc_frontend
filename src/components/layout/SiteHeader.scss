@@ -1,0 +1,362 @@
+$cc-navy: #0d2d62;
+$cc-navy-dark: #081d40;
+$cc-gold: #c9a227;
+$cc-gray: #6b7280;
+
+// ---------------------------------------------------------------------------
+// Top bar
+// ---------------------------------------------------------------------------
+
+.cc-topbar {
+  background: linear-gradient(90deg, $cc-navy-dark 0%, #0a2450 100%);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 13px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(201, 162, 39, 0.25);
+}
+
+.cc-topbar-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.cc-topbar-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+
+  svg {
+    opacity: 0.75;
+    flex-shrink: 0;
+  }
+}
+
+.cc-topbar-divider {
+  width: 1px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.25);
+
+  @media (max-width: 575px) {
+    display: none;
+  }
+}
+
+.top-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease, gap 0.2s ease;
+
+  svg {
+    transition: transform 0.2s ease;
+  }
+
+  &:hover {
+    color: $cc-gold;
+
+    svg {
+      transform: translate(1px, -1px);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Main navbar
+// ---------------------------------------------------------------------------
+
+.cc-navbar {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(13, 45, 98, 0.08);
+  box-shadow: none;
+  padding: 14px 0;
+  transition: box-shadow 0.25s ease, padding 0.25s ease, background 0.25s ease;
+
+  // Every NavDropdown wrapper needs position:relative so the
+  // hover-bridge pseudo-element below is positioned against it.
+  .dropdown {
+    position: relative;
+  }
+
+  &--scrolled {
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 8px 24px rgba(13, 45, 98, 0.1);
+    padding: 8px 0;
+  }
+}
+
+.brand-area {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 12px;
+}
+
+.cc-logo {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.brand-text {
+  top: 7px;
+  position: relative;
+  .title {
+    font-size: 20px;
+    font-weight: 800;
+    color: $cc-navy;
+    letter-spacing: 0.5px;
+    line-height: 0.5;
+  }
+
+  small {
+    color: $cc-gray;
+    font-size: 11px;
+    letter-spacing: 0.3px;
+    padding-left: 5px;
+  }
+}
+
+// Links -----------------------------------------------------------------
+
+.nav-link {
+  position: relative;
+  color: $cc-navy !important;
+  font-weight: 600;
+  font-size: 15px;
+  margin-left: 6px;
+  padding: 8px 12px !important;
+  transition: color 0.2s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 2px;
+    height: 2px;
+    background: $cc-gold;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+
+  &:hover {
+    color: $cc-gold !important;
+
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+.cc-contact-cta {
+  margin-left: 10px !important;
+  border-radius: 999px;
+  background: $cc-navy;
+  color: white !important;
+  padding: 8px 18px !important;
+
+  &::after {
+    display: none;
+  }
+
+  &:hover {
+    background: $cc-gold;
+    color: $cc-navy-dark !important;
+  }
+}
+
+// Dropdown title + custom chevron ------------------------------------------
+
+// We render our own chevron inside the title, so hide Bootstrap's
+// built-in one to avoid showing two arrows.
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+.dropdown-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+}
+
+.dropdown-caret {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+
+  &--open {
+    transform: rotate(180deg);
+  }
+}
+
+// Dropdowns ---------------------------------------------------------------
+
+.dropdown-menu {
+  position: absolute;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(13, 45, 98, 0.18);
+  padding: 8px;
+  margin-top: 10px !important;
+  animation: cc-dropdown-in 0.18s ease;
+
+  // Invisible hover-bridge: fills the visual gap between the nav
+  // toggle and the menu below it so the mouse never leaves the
+  // dropdown's DOM subtree while crossing that gap. Without this,
+  // the dropdown closes before the pointer reaches the sub-items.
+  &::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: transparent;
+  }
+}
+
+@keyframes cc-dropdown-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-item {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+
+  border-radius: 12px;
+
+  padding: 18px 18px;
+
+  color: $cc-navy;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 500;
+
+  transition: .25s;
+
+  position: relative;
+
+  overflow: hidden;
+
+}
+
+.dropdown-item::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:4px;
+
+    height:100%;
+
+    background:$cc-gold;
+
+    transform:scaleY(0);
+
+    transition:.25s;
+
+}
+
+.dropdown-item::after{
+
+    content:"→";
+
+    opacity:0;
+
+    transform:translateX(-8px);
+
+    transition:.25s;
+
+    color:$cc-gold;
+
+    font-weight:700;
+
+}
+
+.dropdown-item:hover{
+
+    background:#f7f9fc;
+
+    color:$cc-navy;
+
+    padding-left:24px;
+
+}
+
+.dropdown-item:hover::before{
+
+    transform:scaleY(1);
+
+}
+
+.dropdown-item:hover::after{
+
+    opacity:1;
+
+    transform:translateX(0);
+
+}
+
+.show > .dropdown-toggle .dropdown-caret {
+  transform: rotate(180deg);
+}
+
+// ---------------------------------------------------------------------------
+// Mobile
+// ---------------------------------------------------------------------------
+
+@media (max-width: 991px) {
+  .brand-text .title {
+    font-size: 16px;
+  }
+
+  .cc-logo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .nav-link::after {
+    display: none;
+  }
+
+  .cc-contact-cta {
+    margin-top: 8px !important;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .dropdown-menu {
+    box-shadow: none;
+    background: rgba(13, 45, 98, 0.03);
+
+    // On mobile the menu renders inline below the toggle (no
+    // absolute positioning gap), so the bridge isn't needed there.
+    &::before {
+      display: none;
+    }
+  }
+}

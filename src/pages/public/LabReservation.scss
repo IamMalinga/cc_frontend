@@ -1,0 +1,153 @@
+$cc-navy: #0d2d62;
+$cc-navy-dark: #081d40;
+$cc-gold: #c9a227;
+$cc-gray: #6b7280;
+$cc-gray-light: #f5f6f8;
+
+.cc-labres-content {
+  padding: 56px 0 64px;
+}
+
+// Notice card ---------------------------------------------------------------
+
+.cc-notice-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: #fff8e6;
+  border: 1px solid rgba(201, 162, 39, 0.4);
+  border-left: 4px solid $cc-gold;
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 36px;
+}
+
+.cc-notice-icon {
+  color: $cc-gold;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.cc-notice-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: $cc-navy;
+  margin-bottom: 8px;
+}
+
+.cc-notice-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: $cc-navy;
+  font-weight: 600;
+  font-size: 14.5px;
+  text-decoration: none;
+  transition: color 0.2s ease, gap 0.2s ease;
+
+  svg {
+    transition: transform 0.2s ease;
+  }
+
+  &:hover {
+    color: $cc-gold;
+
+    svg {
+      transform: translate(1px, -1px);
+    }
+  }
+}
+
+// Action cards --------------------------------------------------------------
+
+.cc-labres-actions {
+  margin-top: 4px;
+}
+
+.cc-action-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 100%;
+  background: white;
+  border: 1px solid rgba(13, 45, 98, 0.1);
+  border-radius: 12px;
+  padding: 22px;
+  text-decoration: none;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 12px 30px rgba(13, 45, 98, 0.12);
+    transform: translateY(-3px);
+    border-color: rgba(13, 45, 98, 0.2);
+
+    .cc-action-arrow {
+      transform: translateX(3px);
+    }
+  }
+
+  &--primary {
+    background: $cc-navy;
+    border-color: $cc-navy;
+
+    .cc-action-icon {
+      background: rgba(255, 255, 255, 0.12);
+      color: white;
+    }
+
+    .cc-action-title {
+      color: white;
+    }
+
+    .cc-action-text {
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .cc-action-arrow {
+      color: $cc-gold;
+    }
+
+    &:hover {
+      box-shadow: 0 12px 30px rgba(13, 45, 98, 0.3);
+    }
+  }
+}
+
+.cc-action-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: rgba(13, 45, 98, 0.08);
+  color: $cc-navy;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cc-action-title {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: $cc-navy;
+  margin-bottom: 4px;
+}
+
+.cc-action-text {
+  font-size: 13.5px;
+  color: $cc-gray;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+.cc-action-arrow {
+  margin-left: auto;
+  flex-shrink: 0;
+  color: $cc-gray;
+  transition: transform 0.2s ease;
+}
+
+@media (max-width: 767px) {
+  .cc-action-card {
+    padding: 18px;
+  }
+}

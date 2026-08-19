@@ -1,0 +1,353 @@
+$cc-navy: #0d2d62;
+$cc-navy-dark: #081d40;
+$cc-navy-light: #1e4a94;
+$cc-gold: #c9a227;
+$cc-gray: #6b7280;
+$cc-gray-light: #f5f6f8;
+$cc-green: #1a9e6b;
+
+.cc-directors-content {
+  padding: 56px 0 80px;
+}
+
+/* =========================================================
+   DIRECTOR CARD
+   ========================================================= */
+
+.cc-portrait-card {
+  position: relative;
+  max-width: 290px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+
+  border: 1px solid rgba(13, 45, 98, 0.08);
+
+  box-shadow:
+    0 8px 24px rgba(13, 45, 98, 0.08),
+    0 2px 6px rgba(13, 45, 98, 0.04);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+
+  /* subtle top accent */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      $cc-navy,
+      $cc-gold,
+      $cc-navy-light
+    );
+    z-index: 5;
+  }
+
+  &:hover {
+
+    border-color: rgba(13, 45, 98, 0.15);
+
+    box-shadow:
+      0 20px 45px rgba(13, 45, 98, 0.15),
+      0 6px 14px rgba(13, 45, 98, 0.07);
+
+    .cc-portrait-frame img {
+      filter: grayscale(0%);
+    }
+
+    .cc-portrait-image-overlay {
+      opacity: 0.12;
+    }
+
+    .cc-portrait-name {
+      color: $cc-navy-light;
+    }
+  }
+}
+
+/* =========================================================
+   CURRENT DIRECTOR BADGE
+   ========================================================= */
+
+.cc-portrait-badge {
+  position: absolute;
+  top: 18px;
+  right: 16px;
+  z-index: 10;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  background: rgba(26, 158, 107, 0.95);
+  color: white;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  padding: 6px 11px;
+  border-radius: 30px;
+
+  box-shadow: 0 5px 14px rgba(26, 158, 107, 0.3);
+
+  &::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #fff;
+  }
+}
+
+/* =========================================================
+   IMAGE
+   ========================================================= */
+
+.cc-portrait-frame {
+  position: relative;
+
+  aspect-ratio: 4 / 4;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(13, 45, 98, 0.08),
+      rgba(201, 162, 39, 0.08)
+    );
+
+  border: none;
+  outline: none;
+  box-shadow: none;
+
+  img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    filter: grayscale(12%);
+
+    transition:
+      transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1),
+      filter 0.4s ease;
+  }
+}
+
+/* Image gradient overlay */
+
+.cc-portrait-image-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    to bottom,
+    transparent 45%,
+    rgba(8, 29, 64, 0.45) 100%
+  );
+
+  opacity: 0.8;
+
+  pointer-events: none;
+
+  transition: opacity 0.35s ease;
+}
+
+/* =========================================================
+   FALLBACK INITIALS
+   ========================================================= */
+
+.cc-portrait-initials {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Merriweather", serif;
+  font-size: 52px;
+  font-weight: 700;
+
+  color: white;
+
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(255, 255, 255, 0.12),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      $cc-navy-dark,
+      $cc-navy,
+      $cc-navy-light
+    );
+
+  letter-spacing: 2px;
+}
+
+/* =========================================================
+   INFORMATION SECTION
+   ========================================================= */
+
+.cc-portrait-plaque {
+  position: relative;
+
+  margin: 0;
+  padding: 20px 18px 21px;
+
+  text-align: center;
+
+  background: #fff;
+
+  border: none;
+  box-shadow: none;
+}
+
+/* small gold line */
+
+.cc-portrait-plaque::before {
+  content: "";
+
+  display: block;
+
+  width: 34px;
+  height: 3px;
+
+  margin: 0 auto 13px;
+
+  border-radius: 10px;
+
+  background: $cc-gold;
+}
+
+/* =========================================================
+   NAME
+   ========================================================= */
+
+.cc-portrait-name {
+  margin: 0 0 10px;
+
+  font-family: "Merriweather", serif;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  line-height: 1.45;
+
+  color: $cc-navy;
+
+  transition: color 0.25s ease;
+}
+
+/* =========================================================
+   PERIOD
+   ========================================================= */
+
+.cc-portrait-period {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  padding: 6px 12px;
+
+  border-radius: 20px;
+
+  background: $cc-gray-light;
+
+  font-size: 11.5px;
+  font-weight: 600;
+
+  color: $cc-gray;
+
+  letter-spacing: 0.4px;
+}
+
+.cc-portrait-period-sep {
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: $cc-gold;
+}
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.cc-directors-loading {
+  display: flex;
+  justify-content: center;
+  padding: 70px 0;
+}
+
+.cc-directors-spinner {
+  width: 38px;
+  height: 38px;
+
+  border-radius: 50%;
+
+  border: 3px solid rgba(13, 45, 98, 0.12);
+  border-top-color: $cc-navy;
+
+  animation: cc-directors-spin 0.8s linear infinite;
+}
+
+@keyframes cc-directors-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.cc-directors-empty {
+  text-align: center;
+
+  padding: 70px 0;
+
+  color: $cc-gray;
+
+  p {
+    margin: 0;
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .cc-directors-content {
+    padding: 40px 0 60px;
+  }
+
+  .cc-portrait-card {
+    max-width: 310px;
+  }
+
+  .cc-portrait-frame {
+    aspect-ratio: 4 / 5;
+  }
+
+  .cc-portrait-name {
+    font-size: 15px;
+  }
+}

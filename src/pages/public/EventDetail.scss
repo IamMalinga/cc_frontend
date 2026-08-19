@@ -1,0 +1,398 @@
+$cc-navy: #0d2d62;
+$cc-navy-dark: #081d40;
+$cc-navy-light: #1e4a94;
+$cc-gold: #c9a227;
+$cc-gray: #6b7280;
+
+// Prevent long unbroken strings (URLs, etc.) in rich-text content from
+// forcing horizontal scroll on the whole page.
+.cc-event-detail {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+// Hero -----------------------------------------------------------------
+
+.cc-event-detail-hero {
+  position: relative;
+  min-height: 380px;
+  display: flex;
+  align-items: flex-end;
+  color: white;
+  overflow: hidden;
+}
+
+// Blurred, scaled-up copy of the same image fills the background so there's
+// no empty letterbox space around the full (uncropped) foreground image.
+.cc-event-detail-hero-backdrop {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(20px) brightness(0.65) saturate(1.1);
+  transform: scale(1.15); // hides blur edge artifacts
+}
+
+// The actual full image, never cropped.
+.cc-event-detail-hero-image {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  max-height: 560px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  margin: 0 auto;
+}
+
+.cc-event-detail-hero-fallback {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, $cc-navy, $cc-navy-light);
+}
+
+.cc-event-detail-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 29, 64, 0.35) 0%,
+    rgba(8, 29, 64, 0.25) 40%,
+    rgba(8, 29, 64, 0.92) 100%
+  );
+}
+
+.cc-event-detail-hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 36px 0 40px;
+}
+
+.cc-event-detail-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  transition: color 0.2s ease, gap 0.2s ease;
+
+  &:hover {
+    color: white;
+    gap: 9px;
+  }
+}
+
+.cc-event-detail-badge {
+  display: inline-block;
+  padding: 6px 16px;
+  background: rgba(201, 162, 39, 0.2);
+  border: 1px solid rgba(201, 162, 39, 0.5);
+  color: #f0d879;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+
+.cc-event-detail-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  max-width: 720px;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+
+  @media (max-width: 767px) {
+    font-size: 1.6rem;
+  }
+}
+
+.cc-event-detail-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+}
+
+// Body ------------------------------------------------------------------
+
+.cc-event-detail-body {
+  max-width: 860px;
+  padding: 44px 0 64px;
+}
+
+.cc-event-detail-content {
+  color: #333;
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 40px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+
+  p, li, a {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  a {
+    // long raw URLs pasted as link text specifically
+    word-break: break-all;
+  }
+}
+
+.cc-event-detail-section {
+  margin-bottom: 44px;
+}
+
+.cc-event-detail-section-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: $cc-navy;
+  margin-bottom: 18px;
+  position: relative;
+  padding-left: 16px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 3px;
+    bottom: 3px;
+    width: 3px;
+    background: $cc-gold;
+    border-radius: 2px;
+  }
+}
+
+// Gallery -----------------------------------------------------------------
+
+.cc-event-gallery-item {
+  position: relative;
+  width: 100%;
+  height: 130px;
+  border: none;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  cursor: pointer;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 29, 64, 0);
+    transition: background 0.2s ease;
+  }
+
+  &:hover::after {
+    background: rgba(8, 29, 64, 0.4);
+  }
+
+  &:hover .cc-event-gallery-zoom {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.cc-event-gallery-zoom {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  color: $cc-navy;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+// Downloads -----------------------------------------------------------
+
+.cc-event-downloads {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cc-event-download-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: white;
+  border: 1px solid rgba(13, 45, 98, 0.1);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+
+  &:hover {
+    border-color: rgba(13, 45, 98, 0.25);
+    box-shadow: 0 10px 26px rgba(13, 45, 98, 0.1);
+    transform: translateY(-2px);
+
+    .cc-event-download-arrow {
+      transform: translateX(3px);
+    }
+  }
+}
+
+.cc-event-download-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(13, 45, 98, 0.08);
+  color: $cc-navy;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cc-event-download-label {
+  flex-grow: 1;
+  font-weight: 600;
+  font-size: 14.5px;
+  color: $cc-navy;
+}
+
+.cc-event-download-arrow {
+  color: $cc-gray;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+// Lightbox ------------------------------------------------------------
+
+.cc-event-lightbox {
+  .modal-content {
+    background: transparent;
+    border: none;
+  }
+}
+
+.cc-event-lightbox-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $cc-navy-dark;
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 300px;
+}
+
+.cc-event-lightbox-image {
+  max-width: 100%;
+  max-height: 75vh;
+  display: block;
+  margin: 0 auto;
+}
+
+.cc-event-lightbox-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+}
+
+.cc-event-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  &--prev {
+    left: 14px;
+  }
+
+  &--next {
+    right: 14px;
+  }
+}
+
+.cc-event-lightbox-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(8, 29, 64, 0.9), transparent);
+  padding: 30px 20px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.cc-event-lightbox-caption {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 13.5px;
+  margin: 0;
+}
+
+.cc-event-lightbox-counter {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+// Not found ---------------------------------------------------------------
+
+.cc-event-detail-notfound {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h4 {
+    color: $cc-navy;
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin-bottom: 24px;
+  }
+}

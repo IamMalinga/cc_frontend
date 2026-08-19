@@ -1,0 +1,128 @@
+$cc-navy: #0d2d62;
+$cc-gold: #c9a227;
+$cc-gray: #6b7280;
+$cc-gray-light: #f5f6f8;
+$cc-red: #dc3545;
+
+.cc-vacancies-content {
+  padding: 56px 0 64px;
+}
+
+.cc-vacancies-empty {
+  h5 {
+    color: $cc-navy;
+  }
+}
+
+.cc-vacancy-card {
+  background: white;
+  border: 1px solid rgba(13, 45, 98, 0.1);
+  border-radius: 16px;
+  padding: 26px 28px;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 16px 36px rgba(13, 45, 98, 0.12);
+    .cc-vacancy-link svg {
+      transform: translateX(3px);
+    }
+  }
+}
+
+.cc-vacancy-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.cc-vacancy-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: $cc-navy;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.cc-vacancy-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+  background: $cc-gray-light;
+  color: $cc-gray;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+  white-space: nowrap;
+
+  svg {
+    font-size: 11px;
+  }
+
+  &--urgent {
+    background: rgba(220, 53, 69, 0.1);
+    color: $cc-red;
+  }
+}
+
+.cc-vacancy-excerpt {
+  color: $cc-gray;
+  font-size: 14.5px;
+  line-height: 1.7;
+  margin-bottom: 16px;
+  flex-grow: 1;
+}
+
+.cc-vacancy-files {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.cc-vacancy-file-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: $cc-navy;
+  background: rgba(13, 45, 98, 0.06);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+
+  svg {
+    font-size: 12px;
+  }
+}
+
+.cc-vacancy-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  color: $cc-navy;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  svg {
+    transition: transform 0.2s ease;
+  }
+
+  &:hover {
+    color: $cc-gold;
+  }
+}
+
+.cc-vacancies-pagination {
+  margin-top: 48px;
+  display: flex;
+  justify-content: center;
+}
