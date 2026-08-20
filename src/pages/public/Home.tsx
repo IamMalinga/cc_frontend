@@ -243,7 +243,7 @@ export default function Home(): JSX.Element {
               <Card className="news-card border-0" key={post.id}>
                 <div className="news-image-wrapper">
                   <Card.Img
-                    src={post.imageUrl ?? undefined}
+                    src={getMediaUrl(post.imageUrl) ?? undefined}
                     className="news-image"
                   />
                   <div className="news-overlay" />
