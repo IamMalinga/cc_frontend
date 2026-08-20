@@ -93,10 +93,6 @@ $cc-gray-light: #f5f6f8;
 
   &:hover {
     box-shadow: 0 20px 40px rgba(13, 45, 98, 0.14);
-    .cc-staff-photo img {
-      transform: scale(1.06);
-    }
-
     .cc-staff-contacts {
       opacity: 1;
       transform: translateY(0);

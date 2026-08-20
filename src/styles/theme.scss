@@ -65,7 +65,6 @@ h6 {
 }
 
 .cc-navbar {
-  background-color: $cc-white;
   border-bottom: 1px solid $cc-gray-200;
 
   .nav-link {
@@ -1053,4 +1052,117 @@ Footer
     color: #c9a227;
     transform: translateY(-5px);
   }
+}
+
+
+.cc-admin-shell {
+  min-height: 100vh;
+  background: $cc-gray-100;
+}
+
+.cc-admin-topbar {
+  background: linear-gradient(135deg, $cc-navy-dark, $cc-navy);
+  padding: 12px 0;
+}
+
+.cc-admin-brand {
+  color: white;
+  font-weight: 700;
+  font-size: 17px;
+
+  span {
+    color: $cc-gold-accent;
+    font-weight: 500;
+    margin-left: 4px;
+  }
+}
+
+.cc-admin-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cc-admin-user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.cc-admin-user-name {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.cc-admin-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.cc-admin-body {
+  padding: 0;
+}
+
+.cc-admin-sidebar {
+  background: white;
+  min-height: calc(100vh - 60px);
+  border-right: 1px solid $cc-gray-200;
+}
+
+.cc-admin-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: 10px;
+  color: $cc-gray-700;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: $cc-gray-100;
+    color: $cc-navy;
+  }
+
+  &.active {
+    background: $cc-navy;
+    color: white;
+    font-weight: 600;
+  }
+}
+
+.cc-admin-nav-icon {
+  width: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.cc-admin-content {
+  background-color: $cc-gray-100;
+  min-height: calc(100vh - 60px);
 }

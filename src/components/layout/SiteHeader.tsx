@@ -45,6 +45,22 @@ function DropdownTitle({
   );
 }
 
+function ExternalIcon() {
+  return (
+    <svg
+      width="11"
+      height="11"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      aria-hidden="true"
+    >
+      <path d="M7 17 17 7M7 7h10v10" />
+    </svg>
+  );
+}
+
 export default function SiteHeader() {
 
   const [scrolled, setScrolled] =
@@ -230,32 +246,43 @@ export default function SiteHeader() {
 
 
 
-          <a
-            href="https://mail.eng.pdn.ac.lk"
-            target="_blank"
-            rel="noreferrer"
-            className="top-link"
-          >
+          <div className="cc-topbar-links">
 
-            UOP FOE PDN Mail
-
-
-            <svg
-              width="12"
-              height="12"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
+            <a
+              href="https://www.pdn.ac.lk/"
+              target="_blank"
+              rel="noreferrer"
+              className="top-link"
             >
+              UOP
+              <ExternalIcon />
+            </a>
 
-              <path d="M7 17 17 7M7 7h10v10"/>
+            <span className="top-link-divider" />
 
-            </svg>
+            <a
+              href="https://eng.pdn.ac.lk/"
+              target="_blank"
+              rel="noreferrer"
+              className="top-link"
+            >
+              FOE
+              <ExternalIcon />
+            </a>
 
+            <span className="top-link-divider" />
 
-          </a>
+            <a
+              href="https://webmail.pdn.ac.lk/"
+              target="_blank"
+              rel="noreferrer"
+              className="top-link"
+            >
+              PDN Mail
+              <ExternalIcon />
+            </a>
 
+          </div>
 
 
         </Container>
@@ -575,108 +602,22 @@ export default function SiteHeader() {
 
 
               </NavDropdown>
-              <NavDropdown
-
-                title={
-                  <DropdownTitle
-                    label="CC Events"
-                    open={openDropdown === "events"}
-                  />
-                }
-
-                id="events-dropdown"
-
-
-
-                show={
-                  openDropdown === "events"
-                }
-
-
-                onToggle={
-                  (show)=>
-                    handleDropdownToggle(
-                      "events",
-                      show
-                    )
-                }
-
-
-                onMouseEnter={
-                  ()=>handleDropdownEnter(
-                    "events"
-                  )
-                }
-
-
-                onMouseLeave={
-                  handleDropdownLeave
-                }
-
-
-              >
-
-
-
-                <NavDropdown.Item
-
-                  as={NavLink}
-
-                  to="/events/staff"
-
-                  onClick={closeMobileMenu}
-
-                >
-
-                  Staff Events
-
-                </NavDropdown.Item>
-
-
-
-
-                <NavDropdown.Item
-
-                  as={NavLink}
-
-                  to="/events/student"
-
-                  onClick={closeMobileMenu}
-
-                >
-
-                  Student Events
-
-                </NavDropdown.Item>
-
-
-
-              </NavDropdown>
-
-
-
-
-
-
-              {/* ================= CONTACT ================= */}
-
-
-
-              <Nav.Link
+                            <Nav.Link
 
                 as={NavLink}
 
-                to="/contact"
-
-                className="cc-contact-cta"
+                to="/events"
 
                 onClick={closeMobileMenu}
 
               >
 
-                Contact
+                CC Events
 
               </Nav.Link>
+
+
+
 
 
 

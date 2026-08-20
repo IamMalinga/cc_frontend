@@ -50,7 +50,9 @@ $cc-gray: #6b7280;
   color: white;
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.2s ease, gap 0.2s ease;
+  transition:
+    color 0.2s ease,
+    gap 0.2s ease;
 
   svg {
     transition: transform 0.2s ease;
@@ -70,23 +72,29 @@ $cc-gray: #6b7280;
 // ---------------------------------------------------------------------------
 
 .cc-navbar {
-  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(13, 45, 98, 0.08);
-  box-shadow: none;
-  padding: 14px 0;
-  transition: box-shadow 0.25s ease, padding 0.25s ease, background 0.25s ease;
 
-  // Every NavDropdown wrapper needs position:relative so the
-  // hover-bridge pseudo-element below is positioned against it.
+  border-bottom: 1px solid rgba(13, 45, 98, 0.08);
+
+  box-shadow: none;
+
+  padding: 14px 0;
+
+  transition:
+    box-shadow 0.25s ease,
+    padding 0.25s ease,
+    background 0.25s ease;
+
   .dropdown {
     position: relative;
   }
 
   &--scrolled {
     background: rgba(255, 255, 255, 0.96);
+
     box-shadow: 0 8px 24px rgba(13, 45, 98, 0.1);
+
     padding: 8px 0;
   }
 }
@@ -108,6 +116,7 @@ $cc-gray: #6b7280;
 .brand-text {
   top: 7px;
   position: relative;
+
   .title {
     font-size: 20px;
     font-weight: 800;
@@ -124,27 +133,40 @@ $cc-gray: #6b7280;
   }
 }
 
-// Links -----------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// Links
+// ---------------------------------------------------------------------------
 
 .nav-link {
   position: relative;
+
   color: $cc-navy !important;
+
   font-weight: 600;
   font-size: 15px;
-  margin-left: 6px;
+
+
+
   padding: 8px 12px !important;
+
   transition: color 0.2s ease;
 
   &::after {
     content: "";
+
     position: absolute;
+
     left: 12px;
     right: 12px;
     bottom: 2px;
+
     height: 2px;
+
     background: $cc-gold;
+
     transform: scaleX(0);
     transform-origin: left;
+
     transition: transform 0.25s ease;
   }
 
@@ -153,15 +175,24 @@ $cc-gray: #6b7280;
 
     &::after {
       transform: scaleX(1);
+      
     }
   }
 }
 
+// ---------------------------------------------------------------------------
+// Contact CTA
+// ---------------------------------------------------------------------------
+
 .cc-contact-cta {
   margin-left: 10px !important;
+
   border-radius: 999px;
+
   background: $cc-navy;
+
   color: white !important;
+
   padding: 8px 18px !important;
 
   &::after {
@@ -170,14 +201,15 @@ $cc-gray: #6b7280;
 
   &:hover {
     background: $cc-gold;
+
     color: $cc-navy-dark !important;
   }
 }
 
-// Dropdown title + custom chevron ------------------------------------------
+// ---------------------------------------------------------------------------
+// Dropdown title + custom chevron
+// ---------------------------------------------------------------------------
 
-// We render our own chevron inside the title, so hide Bootstrap's
-// built-in one to avoid showing two arrows.
 .dropdown-toggle::after {
   display: none !important;
 }
@@ -185,144 +217,243 @@ $cc-gray: #6b7280;
 .dropdown-title {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   padding: 8px 12px;
+  transition: color 0.2s ease;
 }
 
 .dropdown-caret {
-  transition: transform 0.2s ease;
-  flex-shrink: 0;
+  transition:
+    transform 0.25s ease,
+    color 0.2s ease;
 
-  &--open {
-    transform: rotate(180deg);
-  }
+  flex-shrink: 0;
 }
 
-// Dropdowns ---------------------------------------------------------------
+.dropdown-toggle:hover .dropdown-caret {
+  color: $cc-gold;
+}
+
+.dropdown-caret--open {
+  transform: rotate(180deg);
+}
+
+// ---------------------------------------------------------------------------
+// Modern Dropdown
+// ---------------------------------------------------------------------------
 
 .dropdown-menu {
   position: absolute;
-  border: none;
-  border-radius: 12px;
-  box-shadow: 0 16px 40px rgba(13, 45, 98, 0.18);
+  min-width: 245px;
   padding: 8px;
-  margin-top: 10px !important;
-  animation: cc-dropdown-in 0.18s ease;
+  margin-top: 12px !important;
+  border: 1px solid rgba(13, 45, 98, 0.08);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    0 20px 50px rgba(13, 45, 98, 0.14),
+    0 6px 18px rgba(13, 45, 98, 0.06);
+  animation: cc-dropdown-in 0.2s ease forwards;
+  transform-origin: top center;
 
-  // Invisible hover-bridge: fills the visual gap between the nav
-  // toggle and the menu below it so the mouse never leaves the
-  // dropdown's DOM subtree while crossing that gap. Without this,
-  // the dropdown closes before the pointer reaches the sub-items.
+  // Small pointer
+  &::after {
+    content: "";
+
+    position: absolute;
+
+    top: -6px;
+    left: 28px;
+
+    width: 12px;
+    height: 12px;
+
+    background: rgba(255, 255, 255, 0.97);
+
+    border-left: 1px solid rgba(13, 45, 98, 0.08);
+    border-top: 1px solid rgba(13, 45, 98, 0.08);
+
+    transform: rotate(45deg);
+  }
+
+  // Invisible hover bridge
   &::before {
     content: "";
+
     position: absolute;
-    top: -10px;
+
+    top: -14px;
+
     left: 0;
     right: 0;
-    height: 10px;
+
+    height: 14px;
+
     background: transparent;
   }
 }
 
+// ---------------------------------------------------------------------------
+// Dropdown animation
+// ---------------------------------------------------------------------------
+
 @keyframes cc-dropdown-in {
   from {
     opacity: 0;
-    transform: translateY(-6px);
+
+    transform:
+      translateY(-8px)
+      scale(0.99);
   }
+
   to {
     opacity: 1;
-    transform: translateY(0);
+
+    transform:
+      translateY(0)
+      scale(1);
   }
 }
 
+// ---------------------------------------------------------------------------
+// Dropdown Items
+// ---------------------------------------------------------------------------
+
 .dropdown-item {
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-
-  border-radius: 12px;
-
-  padding: 18px 18px;
-
-  color: $cc-navy;
-  gap: 10px;
-  font-size: 15px;
-  font-weight: 500;
-
-  transition: .25s;
-
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+  padding: 12px 14px !important;
+  border: none;
+  border-bottom: 1px solid rgba(13, 45, 98, 0.08);
+  background: transparent;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
 
   overflow: hidden;
 
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    padding-left 0.2s ease,
+    transform 0.2s ease;
+
+  // Remove divider from last item
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
-.dropdown-item::before{
+// ---------------------------------------------------------------------------
+// Gold hover indicator
+// ---------------------------------------------------------------------------
 
-    content:"";
+.dropdown-item::before {
+  content: "";
 
-    position:absolute;
+  position: absolute;
 
-    left:0;
+  left: 0;
 
-    top:0;
+  top: 50%;
 
-    width:4px;
+  width: 3px;
 
-    height:100%;
+  height: 0;
 
-    background:$cc-gold;
+  border-radius: 0 4px 4px 0;
 
-    transform:scaleY(0);
+  background: $cc-gold;
 
-    transition:.25s;
+  transform: translateY(-50%);
 
+  transition: height 0.2s ease;
 }
 
-.dropdown-item::after{
+// ---------------------------------------------------------------------------
+// Arrow
+// ---------------------------------------------------------------------------
 
-    content:"→";
+.dropdown-item::after {
 
-    opacity:0;
+  margin-left: auto;
 
-    transform:translateX(-8px);
+  color: $cc-gold;
 
-    transition:.25s;
+  font-size: 17px;
 
-    color:$cc-gold;
+  font-weight: 700;
 
-    font-weight:700;
+  opacity: 0;
 
+  transform: translateX(-7px);
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
-.dropdown-item:hover{
+// ---------------------------------------------------------------------------
+// Dropdown Item Hover
+// ---------------------------------------------------------------------------
 
-    background:#f7f9fc;
+.dropdown-item:hover,
+.dropdown-item:focus {
 
-    color:$cc-navy;
+  background: rgba(13, 45, 98, 0.055);
 
-    padding-left:24px;
+  padding-left: 19px !important;
 
+  &::before {
+    height: 55%;
+  }
+
+  &::after {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-.dropdown-item:hover::before{
+// ---------------------------------------------------------------------------
+// Dropdown Item Active
+// ---------------------------------------------------------------------------
 
-    transform:scaleY(1);
+.dropdown-item:active {
+  color: $cc-navy !important;
 
+  background: rgba(13, 45, 98, 0.09);
+  color: white !important;
+
+  transform: translateX(1px);
 }
 
-.dropdown-item:hover::after{
+// ---------------------------------------------------------------------------
+// Active NavDropdown
+// ---------------------------------------------------------------------------
 
-    opacity:1;
+.show > .dropdown-toggle {
+  color: $cc-gold !important;
 
-    transform:translateX(0);
-
+  .dropdown-caret {
+    transform: rotate(180deg);
+  }
 }
 
-.show > .dropdown-toggle .dropdown-caret {
-  transform: rotate(180deg);
+// ---------------------------------------------------------------------------
+// Optional dropdown divider
+// ---------------------------------------------------------------------------
+
+.dropdown-divider {
+  margin: 6px 8px;
+
+  border-top: 1px solid rgba(13, 45, 98, 0.08);
 }
 
 // ---------------------------------------------------------------------------
@@ -345,18 +476,54 @@ $cc-gray: #6b7280;
 
   .cc-contact-cta {
     margin-top: 8px !important;
+
     display: inline-block;
+
     text-align: center;
   }
 
-  .dropdown-menu {
-    box-shadow: none;
-    background: rgba(13, 45, 98, 0.03);
+  // -----------------------------------------------------------------------
+  // Mobile dropdown
+  // -----------------------------------------------------------------------
 
-    // On mobile the menu renders inline below the toggle (no
-    // absolute positioning gap), so the bridge isn't needed there.
-    &::before {
+  .dropdown-menu {
+    position: static;
+
+    min-width: 100%;
+
+    margin-top: 4px !important;
+
+    padding: 6px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: rgba(13, 45, 98, 0.035);
+
+    box-shadow: none;
+
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    animation: none;
+
+    &::before,
+    &::after {
       display: none;
+    }
+  }
+
+  .dropdown-item {
+    padding: 11px 14px !important;
+
+    font-size: 14px;
+
+    &:hover,
+    &:focus {
+      padding-left: 18px !important;
+
+      transform: none;
     }
   }
 }
