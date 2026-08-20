@@ -9,6 +9,7 @@ import {
   FaDownload,
 } from 'react-icons/fa';
 import './PdfViewer.scss';
+import { getMediaUrl } from '../../utils/mediaUrl';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -34,6 +35,9 @@ export default function PdfViewer({
     'loading' | 'ready' | 'error'
   >('loading');
 
+  // Convert relative media URL to backend URL
+  const mediaUrl = getMediaUrl(url);
+
   useEffect(() => {
     let cancelled = false;
 
@@ -42,8 +46,13 @@ export default function PdfViewer({
     setNumPages(0);
     setPageNum(1);
 
+    if (!mediaUrl) {
+      setStatus('error');
+      return;
+    }
+
     const loadingTask = pdfjsLib.getDocument({
-      url,
+      url: mediaUrl,
     });
 
     loadingTask.promise
@@ -69,7 +78,7 @@ export default function PdfViewer({
       cancelled = true;
       loadingTask.destroy();
     };
-  }, [url]);
+  }, [mediaUrl]);
 
   useEffect(() => {
     if (!pdfDoc || !canvasRef.current) {
@@ -77,7 +86,10 @@ export default function PdfViewer({
     }
 
     let cancelled = false;
-    let renderTask: { cancel: () => void; promise?: Promise<void> } | null = null;
+    let renderTask: {
+      cancel: () => void;
+      promise?: Promise<void>;
+    } | null = null;
 
     pdfDoc
       .getPage(pageNum)
@@ -134,7 +146,7 @@ export default function PdfViewer({
         <p>This PDF couldn't be loaded for preview.</p>
 
         <a
-          href={url}
+          href={mediaUrl}
           target="_blank"
           rel="noreferrer"
           className="cc-pdf-viewer-link"
@@ -205,7 +217,7 @@ export default function PdfViewer({
           </button>
 
           <a
-            href={url}
+            href={mediaUrl}
             target="_blank"
             rel="noreferrer"
             className="cc-pdf-download-btn"
