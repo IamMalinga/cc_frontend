@@ -1,6 +1,7 @@
 import type { ChangeEvent, JSX } from 'react';
 import { Form, Spinner, Image, Alert } from 'react-bootstrap';
 import { useUploadFileMutation } from '../../api/adminApi';
+import { getMediaUrl } from '../../utils/mediaUrl';
 
 export interface ImageUploadFieldProps {
   label?: string;
@@ -43,7 +44,7 @@ export default function ImageUploadField({
       )}
       {value && (
         <div className="mt-2">
-          <Image src={value} thumbnail style={{ maxHeight: 120 }} />
+          <Image src={getMediaUrl(value)} thumbnail style={{ maxHeight: 120 }} />
         </div>
       )}
     </Form.Group>
