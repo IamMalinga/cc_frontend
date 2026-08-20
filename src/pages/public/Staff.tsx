@@ -14,9 +14,9 @@ interface CategoryTab {
 
 const categories: CategoryTab[] = [
   { key: 'ACADEMIC', label: 'Academic Staff' },
-  { key: 'TECHNICAL', label: 'Non Academic Staff' },
-  { key: 'ADMINISTRATIVE', label: 'Instructors' },
   { key: 'SUPPORT', label: 'Academic Support Staff' },
+  { key: 'ADMINISTRATIVE', label: 'Instructors' },
+  { key: 'TECHNICAL', label: 'Non Academic Staff' },
 ];
 
 function linkIcon(link: StaffLinkDto) {
