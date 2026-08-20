@@ -78,7 +78,7 @@ export default function VacancyDetail(): JSX.Element {
             {attachments.map((att) => (
               <a
                 key={att.id}
-                href={att.fileUrl}
+                href={getMediaUrl(att.fileUrl)}
                 target="_blank"
                 rel="noreferrer"
                 className="cc-vacancy-download-item"

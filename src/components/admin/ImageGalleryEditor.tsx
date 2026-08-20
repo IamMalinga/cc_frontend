@@ -2,6 +2,7 @@ import { Button, Form, Row, Col, Card, Image } from 'react-bootstrap';
 import { FaTrash, FaArrowUp, FaArrowDown } from 'react-icons/fa';
 import { useUploadFileMutation } from '../../api/adminApi';
 import { JSX } from 'react/jsx-runtime';
+import { getMediaUrl } from '@/utils/mediaUrl';
 
 export interface GalleryImageItem {
   id?: number;
@@ -60,7 +61,7 @@ export default function ImageGalleryEditor({ items, onChange }: ImageGalleryEdit
         {items.map((item, index) => (
           <Col md={4} key={index}>
             <Card className="p-2 h-100">
-              <Image src={item.imageUrl} rounded style={{ height: 140, objectFit: 'cover' }} />
+              <Image src={getMediaUrl(item.imageUrl)} rounded style={{ height: 140, objectFit: 'cover' }} />
               <Form.Control
                 size="sm"
                 className="mt-2"
