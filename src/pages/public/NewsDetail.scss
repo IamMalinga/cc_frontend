@@ -14,6 +14,7 @@ $cc-gray: #6b7280;
   display: flex;
   align-items: flex-end;
   color: white;
+  overflow: hidden;
 }
 
 .cc-news-detail-hero-fallback {
@@ -77,6 +78,8 @@ $cc-gray: #6b7280;
   margin-bottom: 18px;
   max-width: 760px;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  overflow-wrap: break-word;
+  word-break: break-word;
 
   @media (max-width: 767px) {
     font-size: 1.7rem;
@@ -97,12 +100,29 @@ $cc-gray: #6b7280;
 .cc-news-detail-body {
   max-width: 780px;
   padding: 48px 0 64px;
+  overflow-x: hidden;
 }
 
 .cc-news-detail-content {
   color: #333;
   font-size: 16.5px;
   line-height: 1.85;
+
+  // Rich-text content often comes through with every space saved as
+  // &nbsp; (common with pasted-from-Word / some WYSIWYG editors), which
+  // blocks normal word-wrap and causes long runs of text to overflow
+  // the container horizontally instead of wrapping. Force-wrap
+  // everything inside so it never breaks the page layout, regardless
+  // of what whitespace/markup comes from the editor.
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  max-width: 100%;
+
+  * {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
 
   p {
     margin-bottom: 20px;
@@ -160,6 +180,21 @@ $cc-gray: #6b7280;
     border: none;
     border-top: 1px solid rgba(13, 45, 98, 0.1);
     margin: 32px 0;
+  }
+
+  // Guard against wide inline tables pasted from Word/Excel
+  table {
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
+  }
+
+  // Guard against long unbroken code/preformatted lines
+  pre,
+  code {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 }
 
