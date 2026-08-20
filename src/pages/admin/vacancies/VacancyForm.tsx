@@ -1,4 +1,4 @@
-import { useState, useEffect, type FormEvent } from 'react';
+import { useState, useEffect, type FormEvent, JSX } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import RichTextEditor from '../../../components/admin/RichTextEditor';
@@ -131,7 +131,7 @@ export default function VacancyForm(): JSX.Element {
           <Form.Text muted>Shown to applicants in an embedded PDF viewer.</Form.Text>
           {form.fileUrl && (
             <div className="mt-2">
-              <PdfViewer url={form.fileUrl} title="Vacancy advertisement" height={360} />
+              <PdfViewer url={form.fileUrl} title="Vacancy advertisement" />
             </div>
           )}
         </Form.Group>
