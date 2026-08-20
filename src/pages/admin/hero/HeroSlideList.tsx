@@ -1,6 +1,7 @@
 import AdminDataTable, { ActiveBadge, type AdminColumn } from '../../../components/admin/AdminDataTable';
 import { useGetAllHeroSlidesQuery, useDeleteHeroSlideMutation } from '../../../api/adminApi';
 import type { HeroSlideDto } from '../../../api/types';
+import { JSX } from 'react/jsx-runtime';
 
 const columns: AdminColumn<HeroSlideDto>[] = [
   { key: 'displayOrder', label: 'Order' },

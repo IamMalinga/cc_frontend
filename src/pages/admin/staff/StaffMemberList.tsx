@@ -1,4 +1,4 @@
-import { useEffect, useState, type DragEvent } from 'react';
+import { JSX, useEffect, useState, type DragEvent } from 'react';
 import { Button, ListGroup, Badge, Spinner, Alert, Form } from 'react-bootstrap';
 import { FaGripVertical } from 'react-icons/fa';
 import AdminDataTable, { ActiveBadge, type AdminColumn } from '../../../components/admin/AdminDataTable';

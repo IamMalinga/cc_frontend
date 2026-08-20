@@ -1,6 +1,7 @@
 import AdminDataTable, { ActiveBadge, type AdminColumn } from '../../../components/admin/AdminDataTable';
 import { useGetAllNewsPostsQuery, useDeleteNewsPostMutation } from '../../../api/adminApi';
 import type { NewsPostDto } from '../../../api/types';
+import { JSX } from 'react/jsx-runtime';
 
 const columns: AdminColumn<NewsPostDto>[] = [
   { key: 'title', label: 'Title' },
