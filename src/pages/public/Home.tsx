@@ -13,6 +13,9 @@ import {
 import { JSX } from 'react/jsx-runtime';
 import { getMediaUrl } from '../../utils/mediaUrl';
 import { FaRegCalendar } from 'react-icons/fa6';
+import labImg1 from "../../assets/labs/lab1.jpg";
+import labImg2 from "../../assets/labs/lab2.jpg";
+import labImg3 from "../../assets/labs/lab3.jpg";
 
 // Strips HTML tags and decodes entities so card excerpts show plain text
 // instead of raw markup (e.g. "<p><span style=...>Text</span></p>" -> "Text").
@@ -36,6 +39,12 @@ export default function Home(): JSX.Element {
     const amount = el.clientWidth * 0.8;
     el.scrollBy({ left: direction === "left" ? -amount : amount, behavior: "smooth" });
   };
+
+  const labImages = [
+  labImg1,
+  labImg2,
+  labImg3,
+];
 
   return (
     <>
@@ -192,7 +201,10 @@ export default function Home(): JSX.Element {
               <div
                 className="lab-scroll-card"
                 key={lab.id}
-                style={{ backgroundImage: `url(${lab.imageUrl})` }}
+                //style={{ backgroundImage: `url(${lab.imageUrl})` }}
+                style={{
+  backgroundImage: `url(${labImages[labs.indexOf(lab) % labImages.length]})`,
+}}
               >
                 <div className="lab-scroll-overlay" />
 
