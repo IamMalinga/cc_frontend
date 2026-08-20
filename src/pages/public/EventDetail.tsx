@@ -123,7 +123,7 @@ export default function EventDetail(): JSX.Element {
               {attachments.map((att) => (
                 <a
                   key={att.id}
-                  href={att.fileUrl}
+                  href={getMediaUrl(att.fileUrl)}
                   target="_blank"
                   rel="noreferrer"
                   className="cc-event-download-item"
@@ -182,7 +182,7 @@ export default function EventDetail(): JSX.Element {
               )}
 
               <img
-                src={images[lightboxIndex].imageUrl}
+                src={getMediaUrl(images[lightboxIndex].imageUrl)}
                 alt={images[lightboxIndex].caption ?? event.title}
                 className="cc-event-lightbox-image"
               />
