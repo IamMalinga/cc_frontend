@@ -1,6 +1,7 @@
 import { useState, useEffect, type FormEvent, JSX } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
+import RichTextEditor from '../../../components/admin/RichTextEditor';
 import ImageUploadField from '../../../components/admin/ImageUploadField';
 import ApiErrorAlert from '../../../components/admin/ApiErrorAlert';
 import {
@@ -61,7 +62,7 @@ export default function NewsPostForm(): JSX.Element {
   }
 
   return (
-    <div style={{ maxWidth: 720 }}>
+    <div style={{ maxWidth: 780 }}>
       <h3 className="mb-4" style={{ color: '#0d2d62' }}>{isEdit ? 'Edit' : 'New'} News Post</h3>
       <ApiErrorAlert error={error} />
 
@@ -75,16 +76,12 @@ export default function NewsPostForm(): JSX.Element {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Content</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={8}
-            value={form.content}
-            onChange={(e) => handleChange('content', e.target.value)}
-            required
-          />
-        </Form.Group>
+        <RichTextEditor
+          label="Content"
+          value={form.content}
+          onChange={(html) => handleChange('content', html)}
+          placeholder="Write the news post content..."
+        />
 
         <ImageUploadField
           label="Thumbnail Image"
