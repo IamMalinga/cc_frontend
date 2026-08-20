@@ -21,14 +21,23 @@ const categories: CategoryTab[] = [
 
 function linkIcon(link: StaffLinkDto) {
   const label = link.label.toLowerCase();
+
   if (label.includes('linkedin')) return <FaLinkedin />;
   if (label.includes('github')) return <FaGithub />;
   if (label.includes('website') || label.includes('portfolio')) return <FaGlobe />;
+
   return <FaLink />;
 }
 
-function StaffGrid({ category, categoryLabel }: { category: StaffCategory; categoryLabel: string }): JSX.Element {
+function StaffGrid({
+  category,
+  categoryLabel,
+}: {
+  category: StaffCategory;
+  categoryLabel: string;
+}): JSX.Element {
   const [page, setPage] = useState(0);
+
   const { data, isLoading, isError } = useGetStaffPageQuery({
     category,
     page,
@@ -71,7 +80,7 @@ function StaffGrid({ category, categoryLabel }: { category: StaffCategory; categ
       <h2 className="cc-staff-category-heading">{categoryLabel}</h2>
 
       <div className="cc-staff-grid">
-        {content.map((member) => {
+        {content.map((member, index) => {
           const links = member.links ?? [];
 
           const initials = member.name
@@ -82,10 +91,20 @@ function StaffGrid({ category, categoryLabel }: { category: StaffCategory; categ
             .toUpperCase();
 
           return (
-            <div className="cc-staff-card" key={member.id}>
+            <div
+              className={`cc-staff-card ${
+                category === 'ACADEMIC' && index === 0
+                  ? 'cc-staff-card--featured'
+                  : ''
+              }`}
+              key={member.id}
+            >
               <div className="cc-staff-photo">
                 {member.imageUrl ? (
-                  <img src={getMediaUrl(member.imageUrl)} alt={member.name} />
+                  <img
+                    src={getMediaUrl(member.imageUrl)}
+                    alt={member.name}
+                  />
                 ) : (
                   <div className="cc-staff-initials">{initials}</div>
                 )}
@@ -122,7 +141,9 @@ function StaffGrid({ category, categoryLabel }: { category: StaffCategory; categ
 
               <div className="cc-staff-body">
                 <h3 className="cc-staff-name">{member.name}</h3>
-                <p className="cc-staff-designation">{member.designation}</p>
+                <p className="cc-staff-designation">
+                  {member.designation}
+                </p>
               </div>
             </div>
           );
@@ -142,14 +163,19 @@ function StaffGrid({ category, categoryLabel }: { category: StaffCategory; categ
 }
 
 export default function Staff(): JSX.Element {
-  const [activeCategory, setActiveCategory] = useState<StaffCategory>('ACADEMIC');
-  const activeLabel = categories.find((c) => c.key === activeCategory)?.label ?? '';
+  const [activeCategory, setActiveCategory] =
+    useState<StaffCategory>('ACADEMIC');
+
+  const activeLabel =
+    categories.find((c) => c.key === activeCategory)?.label ?? '';
 
   return (
     <Container className="cc-staff-content">
       <div className="text-center mb-5">
         <span className="section-tag">MEET THE TEAM</span>
+
         <h1 className="section-heading">Our Staff</h1>
+
         <p className="section-description">
           The people behind the Computing Centre's academic, technical,
           administrative, and support services.
@@ -161,7 +187,11 @@ export default function Staff(): JSX.Element {
           <button
             key={cat.key}
             type="button"
-            className={`cc-staff-tab ${activeCategory === cat.key ? 'cc-staff-tab--active' : ''}`}
+            className={`cc-staff-tab ${
+              activeCategory === cat.key
+                ? 'cc-staff-tab--active'
+                : ''
+            }`}
             onClick={() => setActiveCategory(cat.key)}
           >
             {cat.label}
@@ -169,7 +199,11 @@ export default function Staff(): JSX.Element {
         ))}
       </div>
 
-      <StaffGrid category={activeCategory} categoryLabel={activeLabel} key={activeCategory} />
+      <StaffGrid
+        category={activeCategory}
+        categoryLabel={activeLabel}
+        key={activeCategory}
+      />
     </Container>
   );
 }
