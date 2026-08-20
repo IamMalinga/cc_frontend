@@ -11,6 +11,7 @@ import {
   useGetContactInfoQuery,
 } from '../../api/publicApi';
 import { JSX } from 'react/jsx-runtime';
+import { getMediaUrl } from '../../utils/mediaUrl';
 import { FaRegCalendar } from 'react-icons/fa6';
 
 export default function Home(): JSX.Element {
@@ -40,10 +41,9 @@ export default function Home(): JSX.Element {
     <Carousel indicators controls fade>
       {slides.map((slide) => (
         <Carousel.Item key={slide.id}>
-          <div className="cc-hero" style={{ backgroundImage: `url(${slide.imageUrl})` }}>
+          <div className="cc-hero" style={{ backgroundImage: `url(${getMediaUrl(slide.imageUrl)})` }}>
             <div className="cc-hero-shape cc-hero-shape--one" />
             <div className="cc-hero-shape cc-hero-shape--two" />
-
             <Container className="cc-hero-content">
               <h1 className="cc-hero-title">{slide.title}</h1>
               {slide.subtitle && <p className="cc-hero-subtitle">{slide.subtitle}</p>}
