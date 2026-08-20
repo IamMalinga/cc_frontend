@@ -27,6 +27,13 @@ function getPageNumbers(current: number, total: number): (number | 'ellipsis')[]
   return pages;
 }
 
+// Strips HTML tags and decodes entities so card excerpts show plain text
+// instead of raw markup (e.g. "<p><span style=...>Text</span></p>" -> "Text").
+function stripHtml(html: string): string {
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  return (doc.body.textContent ?? '').replace(/\s+/g, ' ').trim();
+}
+
 export default function NewsList(): JSX.Element {
   const [page, setPage] = useState(0);
   const { data, isLoading } = useGetNewsPageQuery({ page, size: 9 });
@@ -60,45 +67,49 @@ export default function NewsList(): JSX.Element {
       )}
 
       <Row className="gy-4">
-        {data?.content.map((post) => (
-          <Col md={6} lg={4} key={post.id}>
-            <Card className="cc-news-list-card border-0 h-100">
-              <div className="cc-news-list-image-wrapper">
-                {post.imageUrl ? (
-                  <Card.Img src={getMediaUrl(post.imageUrl)} className="cc-news-list-image" />
-                ) : (
-                  <div className="cc-news-list-image cc-news-list-image--placeholder" />
-                )}
-                <div className="cc-news-list-overlay" />
-              </div>
+        {data?.content.map((post) => {
+          const excerpt = stripHtml(post.content);
 
-              <Card.Body>
-                <div className="cc-news-list-date">
-                  <FaRegCalendar />
-                  {new Date(post.publishedDate).toLocaleDateString(undefined, {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric',
-                  })}
+          return (
+            <Col md={6} lg={4} key={post.id}>
+              <Card className="cc-news-list-card border-0 h-100">
+                <div className="cc-news-list-image-wrapper">
+                  {post.imageUrl ? (
+                    <Card.Img src={getMediaUrl(post.imageUrl)} className="cc-news-list-image" />
+                  ) : (
+                    <div className="cc-news-list-image cc-news-list-image--placeholder" />
+                  )}
+                  <div className="cc-news-list-overlay" />
                 </div>
 
-                <Card.Title className="cc-news-list-title">{post.title}</Card.Title>
+                <Card.Body>
+                  <div className="cc-news-list-date">
+                    <FaRegCalendar />
+                    {new Date(post.publishedDate).toLocaleDateString(undefined, {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric',
+                    })}
+                  </div>
 
-                <Card.Text className="cc-news-list-excerpt">
-                  {post.content.slice(0, 110)}
-                  {post.content.length > 110 ? '…' : ''}
-                </Card.Text>
+                  <Card.Title className="cc-news-list-title">{post.title}</Card.Title>
 
-                <Link to={`/news/${post.id}`} className="cc-news-list-link">
-                  Read more
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path d="M5 12h14M13 6l6 6-6 6" />
-                  </svg>
-                </Link>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
+                  <Card.Text className="cc-news-list-excerpt">
+                    {excerpt.slice(0, 110)}
+                    {excerpt.length > 110 ? '…' : ''}
+                  </Card.Text>
+
+                  <Link to={`/news/${post.id}`} className="cc-news-list-link">
+                    Read more
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </Link>
+                </Card.Body>
+              </Card>
+            </Col>
+          );
+        })}
       </Row>
 
       {data && data.totalPages > 1 && (
