@@ -4,6 +4,7 @@ import { FaLink, FaEnvelope, FaLinkedin, FaGithub, FaGlobe } from 'react-icons/f
 import { useGetStaffPageQuery } from '../../api/publicApi';
 import PaginationBar from '../../components/public/PaginationBar';
 import type { StaffCategory, StaffLinkDto } from '../../api/types';
+import { getMediaUrl } from '../../utils/mediaUrl';
 import './Staff.scss';
 
 interface CategoryTab {
@@ -84,7 +85,7 @@ function StaffGrid({ category, categoryLabel }: { category: StaffCategory; categ
             <div className="cc-staff-card" key={member.id}>
               <div className="cc-staff-photo">
                 {member.imageUrl ? (
-                  <img src={member.imageUrl} alt={member.name} />
+                  <img src={getMediaUrl(member.imageUrl)} alt={member.name} />
                 ) : (
                   <div className="cc-staff-initials">{initials}</div>
                 )}

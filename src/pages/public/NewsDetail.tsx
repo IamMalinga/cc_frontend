@@ -3,6 +3,7 @@ import { Container, Spinner } from 'react-bootstrap';
 import DOMPurify from 'dompurify';
 import { useGetNewsByIdQuery } from '../../api/publicApi';
 import { JSX } from 'react/jsx-runtime';
+import { getMediaUrl } from '../../utils/mediaUrl';
 import './NewsDetail.scss';
 
 export default function NewsDetail(): JSX.Element {
@@ -39,7 +40,7 @@ export default function NewsDetail(): JSX.Element {
       {/* Hero banner */}
       <div
         className="cc-news-detail-hero"
-        style={post.imageUrl ? { backgroundImage: `url(${post.imageUrl})` } : undefined}
+        style={post.imageUrl ? { backgroundImage: `url(${getMediaUrl(post.imageUrl)})` } : undefined}
       >
         {!post.imageUrl && <div className="cc-news-detail-hero-fallback" />}
         <div className="cc-news-detail-hero-overlay" />

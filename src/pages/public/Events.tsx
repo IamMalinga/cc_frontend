@@ -5,6 +5,7 @@ import { FaRegImages, FaPaperclip, FaRegCalendar } from 'react-icons/fa';
 import { useGetEventPageQuery } from '../../api/publicApi';
 import PaginationBar from '../../components/public/PaginationBar';
 import type { EventCategory } from '../../api/types';
+import { getMediaUrl } from '../../utils/mediaUrl';
 import './Events.scss';
 
 interface EventTab {
@@ -81,10 +82,10 @@ function EventGrid({ category }: { category?: EventCategory }): JSX.Element {
                   <>
                     <div
                       className="cc-event-image-backdrop"
-                      style={{ backgroundImage: `url(${event.imageUrl})` }}
+                      style={{ backgroundImage: `url(${getMediaUrl(event.imageUrl)})` }}
                     />
                     <img
-                      src={event.imageUrl}
+                      src={getMediaUrl(event.imageUrl)}
                       alt={event.title}
                       className="cc-event-image"
                     />

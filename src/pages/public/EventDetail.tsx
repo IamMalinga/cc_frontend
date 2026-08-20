@@ -4,6 +4,7 @@ import { Container, Spinner, Row, Col, Modal } from 'react-bootstrap';
 import { FaDownload, FaChevronLeft, FaChevronRight, FaTimes, FaRegCalendar } from 'react-icons/fa';
 import { useGetEventByIdQuery } from '../../api/publicApi';
 import RichTextContent from '../../components/public/RichTextContent';
+import { getMediaUrl } from '../../utils/mediaUrl';
 import './EventDetail.scss';
 
 export default function EventDetail(): JSX.Element {
@@ -53,9 +54,9 @@ export default function EventDetail(): JSX.Element {
           <>
             <div
               className="cc-event-detail-hero-backdrop"
-              style={{ backgroundImage: `url(${event.imageUrl})` }}
+              style={{ backgroundImage: `url(${getMediaUrl(event.imageUrl)})` }}
             />
-            <img src={event.imageUrl} alt="" className="cc-event-detail-hero-image" />
+            <img src={getMediaUrl(event.imageUrl)} alt="" className="cc-event-detail-hero-image" />
           </>
         ) : (
           <div className="cc-event-detail-hero-fallback" />
@@ -99,7 +100,7 @@ export default function EventDetail(): JSX.Element {
                     type="button"
                     className="cc-event-gallery-item"
                     onClick={() => setLightboxIndex(index)}
-                    style={{ backgroundImage: `url(${img.imageUrl})` }}
+                    style={{ backgroundImage: `url(${getMediaUrl(img.imageUrl)})` }}
                     aria-label={`View photo ${index + 1}${img.caption ? `: ${img.caption}` : ''}`}
                   >
                     <span className="cc-event-gallery-zoom">

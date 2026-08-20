@@ -4,6 +4,7 @@ import { FaDownload, FaChevronLeft, FaRegClock } from 'react-icons/fa';
 import { useGetVacancyByIdQuery } from '../../api/publicApi';
 import PdfViewer from '../../components/public/PdfViewer';
 import RichTextContent from '../../components/public/RichTextContent';
+import { getMediaUrl } from '../../utils/mediaUrl';
 import { JSX } from 'react/jsx-runtime';
 import './VacancyDetail.scss';
 

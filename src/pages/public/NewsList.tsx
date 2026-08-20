@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { FaChevronLeft, FaChevronRight, FaRegCalendar } from 'react-icons/fa';
 import { useGetNewsPageQuery } from '../../api/publicApi';
 import { JSX } from 'react/jsx-runtime';
+import { getMediaUrl } from '../../utils/mediaUrl';
 import './NewsList.scss';
 
 function getPageNumbers(current: number, total: number): (number | 'ellipsis')[] {
@@ -64,7 +65,7 @@ export default function NewsList(): JSX.Element {
             <Card className="cc-news-list-card border-0 h-100">
               <div className="cc-news-list-image-wrapper">
                 {post.imageUrl ? (
-                  <Card.Img src={post.imageUrl} className="cc-news-list-image" />
+                  <Card.Img src={getMediaUrl(post.imageUrl)} className="cc-news-list-image" />
                 ) : (
                   <div className="cc-news-list-image cc-news-list-image--placeholder" />
                 )}
