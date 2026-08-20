@@ -5,7 +5,7 @@ import { ensureFreshToken, isAuthenticated } from '../auth/keycloak';
 // injects its own endpoints via apiSlice.injectEndpoints so we get one
 // shared cache, one shared set of tag types, and one shared base query.
 const baseQuery = fetchBaseQuery({
-  baseUrl: '/api',
+  baseUrl: `${import.meta.env.VITE_API_BASE_URL}/api`,
   prepareHeaders: async (headers) => {
     if (isAuthenticated()) {
       const token = await ensureFreshToken();
