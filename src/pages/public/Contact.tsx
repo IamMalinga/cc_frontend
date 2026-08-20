@@ -1,5 +1,6 @@
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useGetContactInfoQuery } from '../../api/publicApi';
+import { JSX } from 'react/jsx-runtime';
 
 export default function Contact(): JSX.Element {
   const { data: contact } = useGetContactInfoQuery();

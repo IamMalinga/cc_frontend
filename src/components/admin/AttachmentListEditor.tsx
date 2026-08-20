@@ -1,6 +1,7 @@
 import { Button, Form, Row, Col, Card } from 'react-bootstrap';
 import { FaTrash, FaFilePdf } from 'react-icons/fa';
 import { useUploadFileMutation } from '../../api/adminApi';
+import { JSX } from 'react/jsx-runtime';
 
 export interface AttachmentItem {
   id?: number;

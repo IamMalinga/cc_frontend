@@ -1,5 +1,6 @@
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { JSX } from 'react/jsx-runtime';
 
 export default function NotFound(): JSX.Element {
   return (

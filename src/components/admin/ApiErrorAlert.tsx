@@ -1,5 +1,6 @@
 import { Alert } from 'react-bootstrap';
 import type { ApiError } from '../../api/types';
+import { JSX } from 'react/jsx-runtime';
 
 interface RtkQueryErrorShape {
   data?: ApiError;

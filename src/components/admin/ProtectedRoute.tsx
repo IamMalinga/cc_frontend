@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { JSX, useEffect, useState, type ReactNode } from 'react';
 import { Spinner, Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import keycloak, { login } from '../../auth/keycloak';

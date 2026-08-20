@@ -1,5 +1,6 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import { useGetContactInfoQuery, useGetLabsQuery } from '../../api/publicApi';
+import { JSX } from 'react/jsx-runtime';
 
 export default function About(): JSX.Element {
   const { data: contact } = useGetContactInfoQuery();
