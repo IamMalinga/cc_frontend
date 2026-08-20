@@ -14,6 +14,13 @@ import { JSX } from 'react/jsx-runtime';
 import { getMediaUrl } from '../../utils/mediaUrl';
 import { FaRegCalendar } from 'react-icons/fa6';
 
+// Strips HTML tags and decodes entities so card excerpts show plain text
+// instead of raw markup (e.g. "<p><span style=...>Text</span></p>" -> "Text").
+function stripHtml(html: string): string {
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  return (doc.body.textContent ?? '').replace(/\s+/g, ' ').trim();
+}
+
 export default function Home(): JSX.Element {
   const { data: slides = [], isLoading: slidesLoading } = useGetHeroSlidesQuery();
   const { data: news = [] } = useGetNewsHighlightsQuery();
@@ -239,37 +246,41 @@ export default function Home(): JSX.Element {
           </button>
 
           <div className="news-scroll" ref={newsScrollRef}>
-            {news.slice(0, 6).map((post) => (
-              <Card className="news-card border-0" key={post.id}>
-                <div className="news-image-wrapper">
-                  <Card.Img
-                    src={getMediaUrl(post.imageUrl) ?? undefined}
-                    className="news-image"
-                  />
-                  <div className="news-overlay" />
-                </div>
+            {news.slice(0, 6).map((post) => {
+              const excerpt = stripHtml(post.content);
 
-                <Card.Body>
-                   <div className="cc-news-list-date">
-                                    <FaRegCalendar />
-                                    {new Date(post.publishedDate).toLocaleDateString(undefined, {
-                                      year: 'numeric',
-                                      month: 'short',
-                                      day: 'numeric',
-                                    })}
-                                  </div>
-                  <Card.Title>{post.title}</Card.Title>
-                  <Card.Text>
-                    {post.content.length > 120
-                      ? post.content.slice(0, 120) + "..."
-                      : post.content}
-                  </Card.Text>
-                  <Link to={`/news/${post.id}`} className="news-link">
-                    Read More →
-                  </Link>
-                </Card.Body>
-              </Card>
-            ))}
+              return (
+                <Card className="news-card border-0" key={post.id}>
+                  <div className="news-image-wrapper">
+                    <Card.Img
+                      src={getMediaUrl(post.imageUrl) ?? undefined}
+                      className="news-image"
+                    />
+                    <div className="news-overlay" />
+                  </div>
+
+                  <Card.Body>
+                     <div className="cc-news-list-date">
+                                      <FaRegCalendar />
+                                      {new Date(post.publishedDate).toLocaleDateString(undefined, {
+                                        year: 'numeric',
+                                        month: 'short',
+                                        day: 'numeric',
+                                      })}
+                                    </div>
+                    <Card.Title>{post.title}</Card.Title>
+                    <Card.Text>
+                      {excerpt.length > 120
+                        ? excerpt.slice(0, 120) + "..."
+                        : excerpt}
+                    </Card.Text>
+                    <Link to={`/news/${post.id}`} className="news-link">
+                      Read More →
+                    </Link>
+                  </Card.Body>
+                </Card>
+              );
+            })}
           </div>
 
           <button
