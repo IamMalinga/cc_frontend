@@ -1,6 +1,7 @@
 import { JSX } from 'react/jsx-runtime';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useGetPastDirectorsQuery } from '../../api/publicApi';
+import { getMediaUrl } from '../../utils/mediaUrl';
 import './PastDirectors.scss';
 
 export default function PastDirectors(): JSX.Element {
@@ -50,7 +51,7 @@ export default function PastDirectors(): JSX.Element {
 
                   <div className="cc-portrait-frame">
                     {director.photoUrl ? (
-                      <img src={director.photoUrl} alt={director.name} />
+                      <img src={getMediaUrl(director.photoUrl)} alt={director.name} />
                     ) : (
                       <div className="cc-portrait-initials">{initialsOf(director.name)}</div>
                     )}
